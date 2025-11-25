@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainimator Shop - Каталог</title>
+    <title>Rainimator Shop - Головна</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/style.css">
@@ -61,14 +61,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Головна</a>
+                        <a class="nav-link active" href="index.html">Головна</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="products.html">Каталог</a>
+                        <a class="nav-link" href="products.html">Каталог</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cart.html">
                             <i class="bi bi-cart3"></i> Кошик
+                            <span class="badge bg-danger" id="cart-count">0</span>
                         </a>
                     </li>
                 </ul>
@@ -76,36 +77,17 @@
         </div>
     </nav>
 
-    <!-- Каталог товарів -->
-    <div class="container py-5">
-        <h1 class="text-center mb-4">Каталог одягу</h1>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_Black_-_7260455f-6c40-4798-a1af-74d5ba07dce5_360x.jpg?v=1728682372" alt="Футболка">
-                    <h5>Чорна футболка Rainimator</h5>
-                    <p>Ціна: 499 грн</p>
-                    <a href="product.html" class="btn btn-primary">Детальніше</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="https://crowdmade.com/cdn/shop/files/back-view-mockup-of-a-hoodie-lying-over-a-solid-surface-33900_45d47a96-2224-4441-a427-e4f1b1a601eb_360x.png?v=1739552934" alt="Худі">
-                    <h5>Худі Rainimator</h5>
-                    <p>Ціна: 999 грн</p>
-                    <a href="product2.html" class="btn btn-primary">Детальніше</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_-_8a8ee8a5-0511-414d-b88a-4350338dc277_360x.jpg?v=1728682172" alt="Кепка">
-                    <h5>Біла футболка Rainimator</h5>
-                    <p>Ціна: 499 грн</p>
-                    <a href="product3.html" class="btn btn-primary">Детальніше</a>
-                </div>
-            </div>
+    <!-- Головна секція -->
+    <header class="py-5 text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Ласкаво просимо до Rainimator Shop</h1>
+            <p class="lead">Стильний одяг для кожного сезону</p>
+            <a href="products.html" class="btn btn-primary btn-lg">Переглянути каталог</a>
         </div>
-    </div>
+    </header>
+
+
+    <script src="scripts/index.js"></script>
 </body>
 
 </html>
