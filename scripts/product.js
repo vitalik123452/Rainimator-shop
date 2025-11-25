@@ -25,7 +25,7 @@ function findProductById(products, id) {
 function displayProductDetails(product) {
     const productDetails = document.querySelector('#product-details')
     const breadcrumbTitle = document.querySelector('#breadcrumb-title')
-    
+
     if (!product) {
         productDetails.innerHTML = `
             <div class="col-12 text-center py-5">
@@ -114,3 +114,22 @@ if (productId) {
         </div>
     `
 }
+
+fetch('products.json')
+    .then(response => response.json())
+    .then(products => {
+        const container = document.getElementById('products-container');
+        products.forEach(product => {
+            const productCard = `
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.title}">
+                        <h5>${product.title}</h5>
+                        <p>Ціна: ${product.price} грн</p>
+                        <a href="product.html?id=${product.id}" class="btn btn-primary">Детальніше</a>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += productCard;
+        });
+    });
