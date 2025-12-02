@@ -48,7 +48,7 @@ function displayProducts(products) {
     if (!productsList) return
 
     productsList.innerHTML = ''
-    
+
     if (products.length === 0) {
         productsList.innerHTML = '<div class="col-12 text-center"><p class="text-muted">Товари не знайдено</p></div>'
         return
@@ -96,57 +96,53 @@ function populateCategoryFilter(categories) {
     })
 }
 
-// Застосування фільтрів
+// Сортування та фільтрація
 function applyFilters() {
-    const categoryFilter = document.querySelector('#category-filter').value
-    const sortFilter = document.querySelector('#sort-filter').value
-    const searchInput = document.querySelector('#search-input').value.toLowerCase()
+    const categoryFilter = document.querySelector('#category-filter').value;
+    const sortFilter = document.querySelector('#sort-filter').value;
+    const searchInput = document.querySelector('#search-input').value.toLowerCase();
 
-    // Фільтрація за категорією
-    filteredProducts = allProducts.filter(product => {
-        if (categoryFilter !== 'all' && product.category !== categoryFilter) {
-            return false
-        }
-        return true
-    })
+    // Фільтруємо товари за категорією
+    let filteredProducts = allProducts.filter(product => {
+        return categoryFilter === 'all' || product.category === categoryFilter;
+    });
 
-    // Пошук за назвою
-    if (searchInput) {
-        filteredProducts = filteredProducts.filter(product => {
-            return product.title.toLowerCase().includes(searchInput)
-        })
-    }
+    // Фільтруємо товари за пошуковим запитом
+    filteredProducts = filteredProducts.filter(product => {
+        return product.title.toLowerCase().includes(searchInput);
+    });
 
     // Сортування
-    switch(sortFilter) {
+    switch (sortFilter) {
         case 'price-asc':
-            filteredProducts.sort((a, b) => a.price - b.price)
-            break
+            filteredProducts.sort((a, b) => a.price - b.price);
+            break;
         case 'price-desc':
-            filteredProducts.sort((a, b) => b.price - a.price)
-            break
+            filteredProducts.sort((a, b) => b.price - a.price);
+            break;
         case 'name':
-            filteredProducts.sort((a, b) => a.title.localeCompare(b.title))
-            break
+            filteredProducts.sort((a, b) => a.title.localeCompare(b.title));
+            break;
     }
 
-    displayProducts(filteredProducts)
+    // Відображення товарів
+    displayProducts(filteredProducts);
 }
 
 // Ініціалізація сторінки
 getProducts().then(function(products) {
-    allProducts = products
-    filteredProducts = products
+    allProducts = products;
+    filteredProducts = products;
 
     // Заповнюємо фільтр категорій
-    const categories = getCategories(products)
-    populateCategoryFilter(categories)
+    const categories = getCategories(products);
+    populateCategoryFilter(categories);
 
     // Відображаємо всі товари
-    displayProducts(products)
+    displayProducts(products);
 
     // Додаємо обробники для фільтрів
-    document.querySelector('#category-filter').addEventListener('change', applyFilters)
-    document.querySelector('#sort-filter').addEventListener('change', applyFilters)
-    document.querySelector('#search-input').addEventListener('input', applyFilters)
-})
+    document.querySelector('#category-filter').addEventListener('change', applyFilters);
+    document.querySelector('#sort-filter').addEventListener('change', applyFilters);
+    document.querySelector('#search-input').addEventListener('input', applyFilters);
+});

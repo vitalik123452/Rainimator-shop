@@ -76,12 +76,50 @@
         </div>
     </nav>
 
+    <!-- Фільтри -->
+    <div class="container mt-4">
+        <h2>Фільтри</h2>
+        <form id="filters-form">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="category" class="form-label">Категорія</label>
+                    <select id="category" class="form-select">
+                        <option value="">Всі</option>
+                        <option value="electronics">Футболки</option>
+                        <option value="clothing">Одяг</option>
+                        <option value="accessories">Аксесуари</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="price-range" class="form-label">Ціна</label>
+                    <select id="price-range" class="form-select">
+                        <option value="">Всі</option>
+                        <option value="0-50">0-499 грн</option>
+                        <option value="51-100">499-999 грн</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="availability" class="form-label">Наявність</label>
+                    <select id="availability" class="form-select">
+                        <option value="">Всі</option>
+                        <option value="in-stock">В наявності</option>
+                        <option value="out-of-stock">Немає в наявності</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Застосувати</button>
+                <button type="reset" class="btn btn-secondary">Скинути</button>
+            </div>
+        </form>
+    </div>
+
     <!-- Каталог товарів -->
     <div class="container py-5">
         <h1 class="text-center mb-4">Каталог одягу</h1>
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="product-card">
+                <div class="product-card" data-price="499">
                     <img src="https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_Black_-_7260455f-6c40-4798-a1af-74d5ba07dce5_360x.jpg?v=1728682372" alt="Футболка lance">
                     <h5>Футболка lance</h5>
                     <p>Ціна: 499 грн</p>
@@ -89,7 +127,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="product-card">
+                <div class="product-card" data-price="999">
                     <img src="https://crowdmade.com/cdn/shop/files/back-view-mockup-of-a-hoodie-hanging-3589-el1_360x.png?v=1739553176" alt="Худі">
                     <h5>Худі Rainimator</h5>
                     <p>Ціна: 999 грн</p>
@@ -97,7 +135,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="product-card">
+                <div class="product-card" data-price="499">
                     <img src="https://crowdmade.com/cdn/shop/files/Rainimator_-_The_End_Matriarch_Black_-_e2834e59-a906-4a38-a3a5-b375571ea654_360x.jpg?v=1730385624" alt="Футболка ceris">
                     <h5>Футболка ceris</h5>
                     <p>Ціна: 499 грн</p>
@@ -106,6 +144,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('filters-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const priceRange = document.getElementById('price-range').value;
+            const products = document.querySelectorAll('.product-card');
+
+            products.forEach(product => {
+                const price = parseInt(product.getAttribute('data-price'), 10);
+                let [min, max] = priceRange.split('-').map(Number);
+
+                if (!priceRange || (price >= min && price <= max)) {
+                    product.parentElement.style.display = 'block';
+                } else {
+                    product.parentElement.style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('filters-form').addEventListener('reset', function() {
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                product.parentElement.style.display = 'block';
+            });
+        });
+    </script>
 </body>
 
 </html>
