@@ -14,11 +14,11 @@
             color: #f5f5f5;
             font-family: 'Arial', sans-serif;
         }
-        
+
         .navbar {
             background-color: #1f1f1f;
         }
-        
+
         .cart-item {
             background-color: #1f1f1f;
             border: 1px solid #333;
@@ -26,17 +26,17 @@
             padding: 15px;
             margin-bottom: 15px;
         }
-        
+
         .cart-item img {
             max-width: 100px;
             border-radius: 8px;
         }
-        
+
         .btn-primary {
             background-color: #ff4500;
             border: none;
         }
-        
+
         .btn-primary:hover {
             background-color: #e03e00;
         }
@@ -138,6 +138,73 @@
             </div>
         </div>
     </nav>
+
+    <!-- Кошик -->
+    <div class="container py-5">
+        <h2 class="mb-4">Ваш кошик</h2>
+        <div id="cart-items">
+            <!-- Items will be injected here -->
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-end">
+                <h4>Загальна сума: <span id="cart-total">0</span> грн</h4>
+                <button class="btn btn-primary btn-lg mt-2">Оформити замовлення</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/cart.js"></script>
+    <script>
+        // Logic to render cart
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cart = getCart(); // from js/cart.js
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="alert alert-info">Ваш кошик порожній. <a href="products.html">Перейти до каталогу</a></div>';
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item', 'row', 'align-items-center');
+                    itemElement.innerHTML = `
+                        <div class="col-md-2">
+                            <img src="${item.image}" alt="${item.name}" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>${item.name}</h5>
+                            <p class="text-muted">Ціна: ${item.price} грн</p>
+                        </div>
+                        <div class="col-md-3">
+                             <div class="input-group">
+                                <button class="btn btn-outline-secondary" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <input type="text" class="form-control text-center" value="${item.quantity}" readonly>
+                                <button class="btn btn-outline-secondary" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-end">
+                            <p class="fw-bold">${itemTotal} грн</p>
+                        </div>
+                        <div class="col-md-1 text-end">
+                            <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.id})"><i class="bi bi-trash"></i></button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+            cartTotalElement.textContent = total;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+        // Listen for custom event from cart.js
+        window.addEventListener('cartUpdated', renderCart);
+    </script>
 
 </body>
 

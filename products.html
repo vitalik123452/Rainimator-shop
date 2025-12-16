@@ -14,11 +14,11 @@
             color: #f5f5f5;
             font-family: 'Arial', sans-serif;
         }
-        
+
         .navbar {
             background-color: #1f1f1f;
         }
-        
+
         .product-card {
             background-color: #1f1f1f;
             border: 1px solid #333;
@@ -26,22 +26,22 @@
             padding: 15px;
             text-align: center;
         }
-        
+
         .product-card img {
             max-width: 100%;
             border-radius: 8px;
         }
-        
+
         .product-card h5 {
             margin-top: 10px;
             color: #ff4500;
         }
-        
+
         .btn-primary {
             background-color: #ff4500;
             border: none;
         }
-        
+
         .btn-primary:hover {
             background-color: #e03e00;
         }
@@ -78,90 +78,130 @@
 
     <!-- Фільтри -->
     <div class="container mt-4">
-        <h2>Фільтри</h2>
-        <form id="filters-form">
-            <input type="text" id="search-name" placeholder="Пошук за назвою">
-            <select id="category-filter">
-                <option value="">Всі категорії</option>
-                <option value="electronics">Електроніка</option>
-                <option value="clothing">Одяг</option>
-                <option value="books">Книги</option>
-            </select>
-            <input type="text" id="price-range" placeholder="Ціна (наприклад, 100-500)">
-            <button type="submit">Фільтрувати</button>
-            <button type="reset">Скинути</button>
-        </form>
+        <div class="card bg-dark text-white border-secondary mb-4">
+            <div class="card-body">
+                <h4 class="card-title mb-3"><i class="bi bi-funnel"></i> Фільтри</h4>
+                <form id="filters-form" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="search-name" class="form-label">Пошук</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-secondary border-secondary text-light"><i
+                                    class="bi bi-search"></i></span>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="search-name"
+                                placeholder="Назва товару...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="category-filter" class="form-label">Категорія</label>
+                        <select id="category-filter" class="form-select bg-dark text-white border-secondary">
+                            <option value="">Всі категорії</option>
+                            <option value="clothing">Одяг</option>
+                            <!-- Added options to match data but keeping structure generic -->
+                            <option value="electronics">Електроніка</option>
+                            <option value="books">Книги</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Ціна (грн)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control bg-dark text-white border-secondary" id="min-price"
+                                placeholder="Від">
+                            <span class="input-group-text bg-secondary border-secondary text-light">-</span>
+                            <input type="number" class="form-control bg-dark text-white border-secondary" id="max-price"
+                                placeholder="До">
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end gap-2">
+                        <button type="submit" class="btn btn-primary w-100">Знайти</button>
+                        <button type="reset" class="btn btn-outline-secondary" title="Скинути"><i
+                                class="bi bi-x-lg"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Каталог товарів -->
     <div class="container py-5">
         <h1 class="text-center mb-4">Каталог одягу</h1>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_Black_-_7260455f-6c40-4798-a1af-74d5ba07dce5_360x.jpg?v=1728682372" alt="Product 1">
-                    <h5>Футболка lance</h5>
-                    <p>Ціна: 499 грн</p>
-                    <a href="product.html" class="btn btn-primary">Купити</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-
-                    <img src="https://crowdmade.com/cdn/shop/files/back-view-mockup-of-a-hoodie-hanging-3589-el1_360x.png?v=1739553176" alt="Product 2">
-                    <h5>Худі Rainimator</h5>
-                    <p>Ціна: 999 грн</p>
-                    <a href="product2.html" class="btn btn-primary">Купити</a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="product-card">
-                    <img src="https://crowdmade.com/cdn/shop/files/Rainimator_-_The_End_Matriarch_Black_-_e2834e59-a906-4a38-a3a5-b375571ea654_360x.jpg?v=1730385624" alt="Product 3">
-                    <h5>Футболка ceris</h5>
-                    <p>Ціна: 499 грн</p>
-                    <a href="product3.html" class="btn btn-primary">Купити</a>
-                </div>
-            </div>
+        <div class="row g-4" id="products-container">
+            <!-- Products will be injected here -->
         </div>
+    </div>
 
-        <script>
-            document.getElementById('filters-form').addEventListener('submit', function(event) {
-                event.preventDefault();
+    <script>
+        let allProducts = [];
 
-                const nameFilter = document.getElementById('search-name').value.toLowerCase();
-                const categoryFilter = document.getElementById('category-filter').value;
-                const priceRange = document.getElementById('price-range').value;
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                allProducts = await response.json();
+                renderProducts(allProducts);
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
 
-                const products = document.querySelectorAll('.product-card');
+        function renderProducts(products) {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
 
-                products.forEach(product => {
-                    const name = product.getAttribute('data-name').toLowerCase();
-                    const category = product.getAttribute('data-category');
-                    const price = parseInt(product.getAttribute('data-price'), 10);
+            if (products.length === 0) {
+                container.innerHTML = '<div class="col-12 text-center"><p>Товарів не знайдено.</p></div>';
+                return;
+            }
 
-                    let [min, max] = priceRange.split('-').map(Number);
-                    if (!min) min = 0;
-                    if (!max) max = Infinity;
+            products.forEach(product => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+                col.innerHTML = `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <h5>${product.name}</h5>
+                        <p class="text-muted">Категорія: ${product.category}</p>
+                        <p>Ціна: ${product.price} грн</p>
+                        <a href="product-template.html?id=${product.id}" class="btn btn-primary">Детальніше</a>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+        }
 
-                    const matchesName = !nameFilter || name.includes(nameFilter);
-                    const matchesCategory = !categoryFilter || category === categoryFilter;
-                    const matchesPrice = !priceRange || (price >= min && price <= max);
+        document.getElementById('filters-form').addEventListener('submit', function (event) {
+            event.preventDefault();
 
-                    if (matchesName && matchesCategory && matchesPrice) {
-                        product.style.display = 'block';
-                    } else {
-                        product.style.display = 'none';
-                    }
-                });
+            const nameFilter = document.getElementById('search-name').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+
+            let filtered = allProducts.filter(product => {
+                const name = product.name.toLowerCase();
+
+                let categoryMatch = true;
+                if (categoryFilter) {
+                    if (categoryFilter === 'clothing' && product.category === 'Одяг') categoryMatch = true;
+                    else if (categoryFilter === 'electronics' && product.category === 'Електроніка') categoryMatch = true;
+                    else if (categoryFilter === 'books' && product.category === 'Книги') categoryMatch = true;
+                    else categoryMatch = false;
+                }
+
+                const matchesName = !nameFilter || name.includes(nameFilter);
+                const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+                return matchesName && categoryMatch && matchesPrice;
             });
 
-            document.getElementById('filters-form').addEventListener('reset', function() {
-                const products = document.querySelectorAll('.product-card');
-                products.forEach(product => {
-                    product.style.display = 'block';
-                });
-            });
-        </script>
+            renderProducts(filtered);
+        });
+
+        document.getElementById('filters-form').addEventListener('reset', function () {
+            setTimeout(() => renderProducts(allProducts), 0);
+        });
+
+        // Load initially
+        loadProducts();
+    </script>
 </body>
 
 </html>
