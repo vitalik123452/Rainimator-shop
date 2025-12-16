@@ -1,46 +1,26 @@
-[{
+[
+    {
         "id": 1,
-        "title": "Футболка lance",
-        "description": "Стильна футболка з унікальним дизайном",
-        "fullDescription": "Футболка lance виготовлена з високоякісної бавовни, що забезпечує комфорт і довговічність. Ідеально підходить для повсякденного носіння або як подарунок для фанатів.",
+        "name": "Футболка lance",
+        "category": "Одяг",
         "price": 499,
-        "image": "tshirt.webp",
-        "category": "футболка"
+        "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
+        "image": "https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_Black_-_7260455f-6c40-4798-a1af-74d5ba07dce5_360x.jpg?v=1728682372"
     },
     {
         "id": 2,
-        "title": "Худі Rainimator",
-        "description": "Тепле худі для прохолодної погоди",
-        "fullDescription": "Худі Rainimator - це стильний і зручний вибір для будь-якої погоди. Виготовлене з м'якого матеріалу, що забезпечує тепло і комфорт. Доступне в різних розмірах.",
+        "name": "Худі Rainimator",
+        "category": "Одяг",
         "price": 999,
-        "image": "hoodie.webp",
-        "category": "футболка"
+        "description": "Худі Rainimator - це стильний і зручний вибір для будь-якої погоди. Виготовлене з м'якого матеріалу, що забезпечує тепло і комфорт. Доступне в різних розмірах.",
+        "image": "https://crowdmade.com/cdn/shop/files/back-view-mockup-of-a-hoodie-hanging-3589-el1_360x.png?v=1739553176"
     },
     {
         "id": 3,
-        "title": "Футболка ceris",
-        "description": "Стильна футболка з унікальним дизайном",
-        "fullDescription": "Футболка ceris виготовлена з високоякісної бавовни, що забезпечує комфорт і довговічність. Ідеально підходить для повсякденного носіння або як подарунок для фанатів.",
+        "name": "Футболка ceris",
+        "category": "Одяг",
         "price": 499,
-        "image": "cap.webp",
-        "category": "Одяг"
-    },
-    {
-        "id": 4,
-        "title": "Штани Rainimator",
-        "description": "Зручні штани для активного способу життя",
-        "fullDescription": "Штани Rainimator виготовлені з еластичного матеріалу, що забезпечує свободу рухів. Ідеально підходять для тренувань або повсякденного носіння.",
-        "price": 799,
-        "image": "pants.webp",
-        "category": "Одяг"
-    },
-    {
-        "id": 5,
-        "title": "Куртка Rainimator",
-        "description": "Стильна куртка для будь-якої погоди",
-        "fullDescription": "Куртка Rainimator - це поєднання стилю і функціональності. Водонепроникний матеріал і сучасний дизайн роблять її ідеальним вибором для будь-якої погоди.",
-        "price": 1499,
-        "image": "jacket.webp",
-        "category": "Одяг"
+        "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
+        "image": "https://crowdmade.com/cdn/shop/files/Rainimator_-_The_End_Matriarch_Black_-_e2834e59-a906-4a38-a3a5-b375571ea654_360x.jpg?v=1730385624"
     }
 ]
