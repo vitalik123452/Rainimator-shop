@@ -14,11 +14,11 @@
             color: #f5f5f5;
             font-family: 'Arial', sans-serif;
         }
-
+        
         .navbar {
             background-color: #1f1f1f;
         }
-
+        
         .product-card {
             background-color: #1f1f1f;
             border: 1px solid #333;
@@ -26,24 +26,28 @@
             padding: 15px;
             text-align: center;
         }
-
+        
         .product-card img {
             max-width: 100%;
             border-radius: 8px;
         }
-
+        
         .product-card h5 {
             margin-top: 10px;
             color: #ff4500;
         }
-
+        
         .btn-primary {
             background-color: #ff4500;
             border: none;
         }
-
+        
         .btn-primary:hover {
             background-color: #e03e00;
+        }
+        
+        footer p {
+            text-align: center;
         }
     </style>
 </head>
@@ -87,8 +91,7 @@
                         <div class="input-group">
                             <span class="input-group-text bg-secondary border-secondary text-light"><i
                                     class="bi bi-search"></i></span>
-                            <input type="text" class="form-control bg-dark text-white border-secondary" id="search-name"
-                                placeholder="Назва товару...">
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="search-name" placeholder="Назва товару...">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -104,11 +107,9 @@
                     <div class="col-md-3">
                         <label class="form-label">Ціна (грн)</label>
                         <div class="input-group">
-                            <input type="number" class="form-control bg-dark text-white border-secondary" id="min-price"
-                                placeholder="Від">
+                            <input type="number" class="form-control bg-dark text-white border-secondary" id="min-price" placeholder="Від">
                             <span class="input-group-text bg-secondary border-secondary text-light">-</span>
-                            <input type="number" class="form-control bg-dark text-white border-secondary" id="max-price"
-                                placeholder="До">
+                            <input type="number" class="form-control bg-dark text-white border-secondary" id="max-price" placeholder="До">
                         </div>
                     </div>
                     <div class="col-md-2 d-flex align-items-end gap-2">
@@ -167,7 +168,7 @@
             });
         }
 
-        document.getElementById('filters-form').addEventListener('submit', function (event) {
+        document.getElementById('filters-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const nameFilter = document.getElementById('search-name').value.toLowerCase();
@@ -195,7 +196,7 @@
             renderProducts(filtered);
         });
 
-        document.getElementById('filters-form').addEventListener('reset', function () {
+        document.getElementById('filters-form').addEventListener('reset', function() {
             setTimeout(() => renderProducts(allProducts), 0);
         });
 
@@ -203,5 +204,8 @@
         loadProducts();
     </script>
 </body>
+<footer>
+    <p>Rainimator shop © 2025 • company</p>
+</footer>
 
 </html>
