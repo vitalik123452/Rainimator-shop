@@ -8,7 +8,7 @@ function displayCart() {
 
     // Перевіряємо чи є товари в кошику
     const itemCount = cart.getItemCount()
-    
+
     if (itemCount === 0) {
         // Показуємо повідомлення про порожній кошик
         cartContent.innerHTML = ''
@@ -23,11 +23,11 @@ function displayCart() {
 
     // Генеруємо HTML для товарів у кошику
     let cartHTML = '<div class="list-group">'
-    
+
     for (let key in cart.items) {
         const item = cart.items[key]
         const itemTotal = item.price * item.quantity
-        
+
         cartHTML += `
             <div class="list-group-item">
                 <div class="row align-items-center">
@@ -66,7 +66,7 @@ function displayCart() {
             </div>
         `
     }
-    
+
     cartHTML += '</div>'
     cartContent.innerHTML = cartHTML
 
@@ -93,7 +93,7 @@ function addCartEventListeners() {
             } else if (action === 'decrease') {
                 cart.updateQuantity(itemId, currentQuantity - 1)
             }
-            
+
             displayCart()
         })
     })
@@ -104,13 +104,13 @@ function addCartEventListeners() {
         input.addEventListener('change', function() {
             const itemId = parseInt(this.getAttribute('data-id'))
             const newQuantity = parseInt(this.value)
-            
+
             if (newQuantity > 0) {
                 cart.updateQuantity(itemId, newQuantity)
             } else {
                 cart.removeItem(itemId)
             }
-            
+
             displayCart()
         })
     })
@@ -120,7 +120,7 @@ function addCartEventListeners() {
     removeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const itemId = parseInt(this.getAttribute('data-id'))
-            
+
             if (confirm('Ви впевнені, що хочете видалити цей товар?')) {
                 cart.removeItem(itemId)
                 displayCart()
@@ -141,4 +141,12 @@ if (clearCartBtn) {
 }
 
 // Ініціалізація сторінки кошика
+const cart = new Cart();
+cart.addItem({
+    id: 'shirt123',
+    name: 'Футболка',
+    size: 'M',
+    quantity: 1
+});
+
 displayCart()

@@ -94,6 +94,25 @@ function populateCategoryFilter(categories) {
         option.textContent = category
         categoryFilter.appendChild(option)
     })
+
+    // Додаємо обробник подій для фільтра
+    categoryFilter.addEventListener('change', function(event) {
+        const selectedCategory = event.target.value
+        filterProductsByCategory(selectedCategory)
+    })
+}
+
+// Фільтрація продуктів за категорією
+function filterProductsByCategory(category) {
+    const products = document.querySelectorAll('.product-item')
+    products.forEach(product => {
+        const productCategory = product.getAttribute('data-category')
+        if (category === 'all' || productCategory === category) {
+            product.style.display = 'block'
+        } else {
+            product.style.display = 'none'
+        }
+    })
 }
 
 // Сортування та фільтрація
@@ -129,14 +148,19 @@ function applyFilters() {
     displayProducts(filteredProducts);
 }
 
+// Ініціалізація фільтра
+function initializeCategoryFilter(products) {
+    const categories = getCategories(products)
+    populateCategoryFilter(['all', ...categories]) // Додаємо опцію "all" для всіх категорій
+}
+
 // Ініціалізація сторінки
 getProducts().then(function(products) {
     allProducts = products;
     filteredProducts = products;
 
     // Заповнюємо фільтр категорій
-    const categories = getCategories(products);
-    populateCategoryFilter(categories);
+    initializeCategoryFilter(products);
 
     // Відображаємо всі товари
     displayProducts(products);

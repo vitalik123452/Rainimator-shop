@@ -87,3 +87,24 @@ async function initProductPage() {
 
 // Ініціалізація сторінки
 initProductPage();
+document.getElementById("addToCartBtn").addEventListener("click", () => {
+    const product = {
+        id: "rain-wynter-hoodie",
+        name: "Rain Wynter Hoodie",
+        price: 1200,
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("✅ Товар додано в кошик!");
+});
