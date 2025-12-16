@@ -65,6 +65,73 @@
                         <a class="nav-link active" href="cart.html">
                             <i class="bi bi-cart3"></i> Кошик
                             <span class="badge bg-danger" id="cart-count">0</span>
+                            <script>
+                                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                                const cartItems = document.getElementById('cart-items');
+                                const totalEl = document.getElementById('total');
+                                const clearBtn = document.getElementById('clear-cart');
+
+                                function renderCart() {
+                                    cartItems.innerHTML = '';
+                                    let total = 0;
+
+                                    if (cart.length === 0) {
+                                        cartItems.innerHTML = '<p class="empty-cart">Кошик порожній</p>';
+                                        totalEl.textContent = '';
+                                        return;
+                                    }
+
+                                    cart.forEach((item, index) => {
+                                        total += item.price * item.quantity;
+
+                                        const itemEl = document.createElement('div');
+                                        itemEl.className = 'cart-item';
+
+                                        itemEl.innerHTML = `
+                                      <div class="cart-item-info">
+                                        <span class="cart-item-name">${item.name}</span>
+                                        <span class="cart-item-price">${item.price} грн</span>
+                                      </div>
+                            
+                                      <div class="cart-item-controls">
+                                        <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                                        <span class="cart-item-qty">${item.quantity}</span>
+                                        <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                                      </div>
+                            
+                                      <button class="remove-btn" onclick="removeItem(${index})">×</button>
+                                    `;
+
+                                        cartItems.appendChild(itemEl);
+                                    });
+
+                                    totalEl.textContent = 'Разом: ' + total + ' грн';
+                                    localStorage.setItem('cart', JSON.stringify(cart));
+                                }
+
+                                function changeQty(index, value) {
+                                    cart[index].quantity += value;
+                                    if (cart[index].quantity <= 0) {
+                                        cart.splice(index, 1);
+                                    }
+                                    renderCart();
+                                }
+
+                                function removeItem(index) {
+                                    cart.splice(index, 1);
+                                    renderCart();
+                                }
+
+                                clearBtn.addEventListener('click', () => {
+                                    cart = [];
+                                    localStorage.removeItem('cart');
+                                    renderCart();
+                                });
+
+                                renderCart();
+                            </script>
+
                         </a>
                     </li>
                 </ul>

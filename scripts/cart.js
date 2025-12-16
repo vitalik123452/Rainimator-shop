@@ -1,55 +1,58 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// cart.js
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.querySelector('#cart-container');
+    const totalContainer = document.querySelector('#cart-total');
 
-function renderCart() {
-    const cartDiv = document.getElementById("cart");
-    const totalDiv = document.getElementById("total");
-    cartDiv.innerHTML = "";
+    if (!cartContainer) return;
 
-    let total = 0;
+    // Функція для відображення кошика
+    function renderCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartContainer.innerHTML = '';
 
-    if (cart.length === 0) {
-        cartDiv.innerHTML = "<p>Кошик порожній 😢</p>";
-        totalDiv.textContent = "Разом: 0 грн";
-        return;
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Кошик порожній</p>';
+            if (totalContainer) totalContainer.innerText = '0 грн';
+            return;
+        }
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            itemDiv.style.display = 'flex';
+            itemDiv.style.alignItems = 'center';
+            itemDiv.style.marginBottom = '10px';
+            itemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.title}" width="80" style="margin-right:10px;">
+                <div>
+                    <h4>${item.title}</h4>
+                    <p>${item.price}</p>
+                    <button class="remove-item" data-index="${index}">Видалити</button>
+                </div>
+            `;
+            cartContainer.appendChild(itemDiv);
+
+            // Підрахунок суми
+            const priceNumber = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+            total += priceNumber;
+        });
+
+        if (totalContainer) totalContainer.innerText = `${total} грн`;
+
+        // Видалення товару
+        const removeButtons = cartContainer.querySelectorAll('.remove-item');
+        removeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const index = btn.dataset.index;
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            });
+        });
     }
 
-    cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-
-        cartDiv.innerHTML += `
-      <div class="item">
-        <div>
-          <strong>${item.name}</strong><br>
-          ${item.price} грн × 
-          <input type="number" min="1" value="${item.quantity}"
-            onchange="updateQuantity(${index}, this.value)">
-        </div>
-        <button onclick="removeItem(${index})">✖</button>
-      </div>
-    `;
-    });
-
-    totalDiv.textContent = `Разом: ${total} грн`;
-}
-
-function removeItem(index) {
-    cart.splice(index, 1);
-    saveCart();
-}
-
-function updateQuantity(index, value) {
-    cart[index].quantity = Number(value);
-    saveCart();
-}
-
-function clearCart() {
-    cart = [];
-    saveCart();
-}
-
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
     renderCart();
-}
-
-renderCart();
+});

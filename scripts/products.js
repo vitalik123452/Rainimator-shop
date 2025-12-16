@@ -170,3 +170,7 @@ getProducts().then(function(products) {
     document.querySelector('#sort-filter').addEventListener('change', applyFilters);
     document.querySelector('#search-input').addEventListener('input', applyFilters);
 });
+// Перевіряємо чи існує LocalStorage для кошика
+if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+}
