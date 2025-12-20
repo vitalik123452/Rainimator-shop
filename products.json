@@ -1,7 +1,7 @@
 [{
         "id": 1,
         "name": "Футболка lance",
-        "category": "Одяг",
+        "category": "Футболки",
         "price": 499,
         "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
         "image": "https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_Black_-_7260455f-6c40-4798-a1af-74d5ba07dce5_360x.jpg?v=1728682372"
@@ -17,7 +17,7 @@
     {
         "id": 3,
         "name": "Футболка ceris",
-        "category": "Одяг",
+        "category": "Футболки",
         "price": 499,
         "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
         "image": "https://crowdmade.com/cdn/shop/files/Rainimator_-_The_End_Matriarch_Black_-_e2834e59-a906-4a38-a3a5-b375571ea654_360x.jpg?v=1730385624"
@@ -25,7 +25,7 @@
     {
         "id": 4,
         "name": "Футболка stella",
-        "category": "Одяг",
+        "category": "Футболки",
         "price": 499,
         "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
         "image": "https://crowdmade.com/cdn/shop/files/Rainimator_Shirt_-_2bbec328-c892-4b24-8f14-170dd6b1abd6_360x.jpg?v=1739552409"
@@ -34,7 +34,7 @@
         "id": 5,
         "name": "Худі Rainimator сірий",
         "category": "Одяг",
-        "price": 1299,
+        "price": 999,
         "description": "Худі Rainimator - це стильний і зручний вибір для будь-якої погоди. Виготовлене з м'якого матеріалу, що забезпечує тепло і комфорт. Доступне в різних розмірах.",
         "image": "https://crowdmade.com/cdn/shop/files/back-view-mockup-of-a-hoodie-lying-over-a-solid-surface-33900_45d47a96-2224-4441-a427-e4f1b1a601eb_360x.png?v=1739552934"
     },
@@ -48,8 +48,8 @@
     },
     {
         "id": 7,
-        "name": "біла футболка lence",
-        "category": "Одяг",
+        "name": "біла футболка lance",
+        "category": "Футболки",
         "price": 699,
         "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
         "image": "https://crowdmade.com/cdn/shop/files/Lord_of_the_Void_-_8a8ee8a5-0511-414d-b88a-4350338dc277_360x.jpg?v=1728682172"
@@ -57,7 +57,7 @@
     {
         "id": 8,
         "name": "біла футболка ceris",
-        "category": "Одяг",
+        "category": "Футболки",
         "price": 699,
         "description": "Стильна футболка з унікальним дизайном для фанатів Rainimator.",
         "image": "https://crowdmade.com/cdn/shop/files/Rainimator_-_The_End_Matriarch_White_-_f657770f-79ea-4694-8fea-7a248098cf97_360x.jpg?v=1730385718"

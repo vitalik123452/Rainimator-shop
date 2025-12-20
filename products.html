@@ -100,7 +100,7 @@
                             <option value="">Всі категорії</option>
                             <option value="clothing">Одяг</option>
                             <!-- Added options to match data but keeping structure generic -->
-                            <option value="electronics">Електроніка</option>
+                            <option value="T-shirts">Футболки</option>
                             <option value="books">Книги</option>
                         </select>
                     </div>
@@ -182,7 +182,7 @@
                 let categoryMatch = true;
                 if (categoryFilter) {
                     if (categoryFilter === 'clothing' && product.category === 'Одяг') categoryMatch = true;
-                    else if (categoryFilter === 'electronics' && product.category === 'Електроніка') categoryMatch = true;
+                    else if (categoryFilter === 'T-shirts' && product.category === 'Футболки') categoryMatch = true;
                     else if (categoryFilter === 'books' && product.category === 'Книги') categoryMatch = true;
                     else categoryMatch = false;
                 }
