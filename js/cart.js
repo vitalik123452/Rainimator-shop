@@ -62,3 +62,9 @@ function updateQuantity(productId, change) {
     updateCartCount();
     window.dispatchEvent(new Event('cartUpdated'));
 }
+
+let button_checkout = document.getElementById('button_checkout');
+button_checkout.addEventListener('click', function() {
+    window.location.href = 'checkout.html';
+
+});
